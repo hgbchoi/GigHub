@@ -9,23 +9,23 @@ namespace GigHub.Models
     public class Gig
     {
         public int Id { get; set; }
+        
+        public ApplicationUser Artist { get; set; }
 
         [Required]
-        [MaxLength(128)]
-        public ApplicationUser Artist { get; set; }
+        public string ArtistId { get; set; }
 
         [Required]
         public DateTime DateTime { get; set; }
 
         [Required]
-        [MaxLength(255)]
+        [StringLength(255)]
         public string Venue { get; set; }
 
-        [Required]
-        [MaxLength(128)]
-        public string Name { get; set; }
+        
+        public Genre Genre { get; set; }
 
         [Required]
-        public Genre Genre { get; set; }        
+        public byte GenreId { get; set; }
     }
 }

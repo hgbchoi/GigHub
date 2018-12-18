@@ -11,7 +11,7 @@ namespace GigHub.Models
         public byte Id { get; set; }
 
         [Required]
-        [MaxLength(128)]
+        [StringLength(128)]
         public string Name { get; set; }
     }
 }
