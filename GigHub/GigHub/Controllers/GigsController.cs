@@ -37,7 +37,6 @@ namespace GigHub.Controllers
                 viewModel.Genres = _context.Genres.ToList();
                 return View("Create", viewModel);
             }
-
             var gig = new Gig
             {
                 ArtistId = User.Identity.GetUserId(),
