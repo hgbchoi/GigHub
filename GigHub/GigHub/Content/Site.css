@@ -58,10 +58,15 @@ body {
     margin-bottom: 20px;
 }
 
+select.form-control {
+    padding: 0px 10px;
+}
+
 .form-control {
     font-size: 14px;
     padding: 20px 14px;
     border-radius: 9px;
+    height:42px;
 }
     
 .form-control:focus {
