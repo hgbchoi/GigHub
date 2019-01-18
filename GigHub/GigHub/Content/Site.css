@@ -83,8 +83,6 @@ select.form-control {
 }
 
 .btn {
-    font-size: 17px;
-    padding: 7px 20px;
     border-radius: 9px;
 }
 
@@ -136,4 +134,26 @@ select.form-control {
 
 .gigs li > .details .Genre {
     font-size:15px;    
+}
+
+.hide {
+    display: none;
+}
+
+.already-attending-error {
+    padding: 20px 30px;
+    width: 70%;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    background-color: red;
+}
+
+.already-attending-error p{    
+    margin: 0;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    
 }

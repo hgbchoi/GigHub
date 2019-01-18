@@ -9,34 +9,36 @@ using GigHub.Dtos;
 using GigHub.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Newtonsoft.Json;
 
 namespace GigHub.Controllers
 {    
     [Authorize]
-    public class AttendancesController : ApiController
+    public class FollowsController : ApiController
     {
 
         private readonly ApplicationDbContext _context;
 
-        public AttendancesController()
+        public FollowsController()
         {
             _context = new ApplicationDbContext();
         }
         
         [HttpPost]
-        public IHttpActionResult Attend(AttendanceDto dto)
+        public IHttpActionResult Follow(FollowDto dto)
         {
-            var userId = User.Identity.GetUserId();           
-            var attendance = new Attendance
+            var userId = User.Identity.GetUserId();      
+            var follow = new Follow
             {
-                GigId = dto.GigId,
-                AttendeeId = userId
+                FollowedId = dto.Followed,
+                FollowerId = userId
             };
-            if (_context.Attendances.Any(a => a.GigId == dto.GigId && a.AttendeeId == userId))            
-                return BadRequest("Attendance already exists");            
-            _context.Attendances.Add(attendance);
+            if (_context.Follows.Any(f => f.FollowedId == dto.Followed && f.FollowerId == userId))
+                return BadRequest("Already Following");
+            _context.Follows.Add(follow);
             _context.SaveChanges();            
             return Ok();
+
         }        
     }
 }

@@ -184,10 +184,13 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FollowsController.cs" />
     <Compile Include="Controllers\AttendancesController.cs" />
     <Compile Include="Controllers\GigsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Dtos\FollowDto.cs" />
+    <Compile Include="Dtos\AttendanceDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -227,9 +230,22 @@
     <Compile Include="Migrations\201901170205313_AddAttendancesTable.Designer.cs">
       <DependentUpon>201901170205313_AddAttendancesTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901180218151_addFollowsTable.cs" />
+    <Compile Include="Migrations\201901180218151_addFollowsTable.Designer.cs">
+      <DependentUpon>201901180218151_addFollowsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901180221271_changeToString.cs" />
+    <Compile Include="Migrations\201901180221271_changeToString.Designer.cs">
+      <DependentUpon>201901180221271_changeToString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901180310140_changeToString1.cs" />
+    <Compile Include="Migrations\201901180310140_changeToString1.Designer.cs">
+      <DependentUpon>201901180310140_changeToString1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicatoinDbContext.cs" />
+    <Compile Include="Models\Follow.cs" />
     <Compile Include="Models\Attendance.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Gig.cs" />
@@ -342,6 +358,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901170205313_AddAttendancesTable.resx">
       <DependentUpon>201901170205313_AddAttendancesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901180218151_addFollowsTable.resx">
+      <DependentUpon>201901180218151_addFollowsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901180221271_changeToString.resx">
+      <DependentUpon>201901180221271_changeToString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901180310140_changeToString1.resx">
+      <DependentUpon>201901180310140_changeToString1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
