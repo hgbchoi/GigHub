@@ -28,6 +28,26 @@ span.field-validation-error {
     font-weight: bold;
 }
 
+.voffset {
+    margin-top: 2px;
+}
+
+.voffset1 {
+    margin-top: 5px;
+}
+
+.voffset2 {
+    margin-top: 10px;
+}
+
+.voffset3 {
+    margin-top: 20px;
+}
+
+.voffset4 {
+    margin-top: 40px;
+}
+
 /* Bootstrap Overrides */
 .navbar-inverse {
     background-color: #ff4342;
@@ -124,16 +144,20 @@ select.form-control {
 .gigs li > .details{
     position:absolute;
     top:0;
+    width: 20%;
     padding-left: 70px;
 }
 
 .gigs li > .details .artist {
     font-weight: bold;
+    text-align: right;
     display: block;    
 }
 
-.gigs li > .details .Genre {
-    font-size:15px;    
+.gigs li > .details .genre {
+    font-size: 15px;
+    text-align: right;
+    display: block;
 }
 
 .hide {
@@ -147,7 +171,7 @@ select.form-control {
     margin: 0 auto;
     margin-bottom: 30px;
     border-radius: 10px;
-    background-color: red;
+    background-color: #ff4342;
 }
 
 .already-attending-error p{    

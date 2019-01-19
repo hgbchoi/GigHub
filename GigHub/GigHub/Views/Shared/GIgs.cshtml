@@ -1,4 +1,4 @@
-﻿@model GigHub.ViewModels.HomeViewModel
+﻿@model GigHub.ViewModels.GigsViewModel
 @{
     ViewBag.Title = "Home Page";
 }
@@ -7,7 +7,8 @@
     <p>You are already attending this gig!</p>
 </div>
 
-<ul class="gigs">
+<h1>@Model.Heading</h1>
+<ul class="gigs voffset4">
     
     @foreach (var gig in Model.UpcomingGigs)
     {
@@ -20,21 +21,22 @@
                     @gig.DateTime.ToString("d ")
                 </div>
             </div>
-            <div class="details">
-                <span class="artist">
-                    @gig.Artist.Name
-                    @if (Model.ShowActions)
-                    {
-                        <button data-artist-id="@gig.ArtistId" class="js-toggle-follow btn-link">Follow</button>
-                    }
-                </span>
-                <span class="genre">
-                    @gig.Genre.Name
-                </span>
-                @if (Model.ShowActions)
-                {
-                    <button data-gig-id="@gig.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
-                }
+            <div class="details">                
+                    <span class="artist">
+                        @gig.Artist.Name
+                        @if (Model.ShowActions)
+                        {
+                            <button data-artist-id="@gig.ArtistId" class="js-toggle-follow btn-link">Follow</button>
+                        }
+                   </span>                                
+                   <span class="genre">
+                        @gig.Genre.Name
+                        @if (Model.ShowActions)
+                        {
+                            <button data-gig-id="@gig.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
+                        }
+                    </span>
+                
             </div>
         </li>
     }
@@ -57,7 +59,7 @@
                             .removeClass("hide")
                             .delay(2000)
                             .queue(function() {
-                                $(".already-attending-error").addClass("hide"); 
+                                $(".already-attending-error").addClass("hide").dequeue(); 
                             });
                     });
             });
