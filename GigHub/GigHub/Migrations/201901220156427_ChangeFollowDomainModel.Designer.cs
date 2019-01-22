@@ -7,13 +7,13 @@ namespace GigHub.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class changeToString1 : IMigrationMetadata
+    public sealed partial class ChangeFollowDomainModel : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(changeToString1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangeFollowDomainModel));
         
         string IMigrationMetadata.Id
         {
-            get { return "201901180310140_changeToString1"; }
+            get { return "201901220156427_ChangeFollowDomainModel"; }
         }
         
         string IMigrationMetadata.Source

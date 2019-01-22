@@ -12,8 +12,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Newtonsoft.Json;
 
 namespace GigHub.Controllers
-{    
-    [Authorize]
+{     
+    [System.Web.Mvc.Authorize]
     public class FollowsController : ApiController
     {
 
@@ -23,11 +23,11 @@ namespace GigHub.Controllers
         {
             _context = new ApplicationDbContext();
         }
-        
-        [HttpPost]
+
+        [System.Web.Mvc.HttpPost]
         public IHttpActionResult Follow(FollowDto dto)
         {
-            var userId = User.Identity.GetUserId();      
+            var userId = User.Identity.GetUserId();
             var follow = new Follow
             {
                 FollowedId = dto.Followed,
@@ -36,9 +36,9 @@ namespace GigHub.Controllers
             if (_context.Follows.Any(f => f.FollowedId == dto.Followed && f.FollowerId == userId))
                 return BadRequest("Already Following");
             _context.Follows.Add(follow);
-            _context.SaveChanges();            
+            _context.SaveChanges();
             return Ok();
 
-        }        
+        }
     }
 }

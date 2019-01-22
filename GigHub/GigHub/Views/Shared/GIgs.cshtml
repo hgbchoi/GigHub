@@ -9,7 +9,7 @@
 
 <h1>@Model.Heading</h1>
 <ul class="gigs voffset4">
-    
+
     @foreach (var gig in Model.UpcomingGigs)
     {
         <li>
@@ -21,22 +21,22 @@
                     @gig.DateTime.ToString("d ")
                 </div>
             </div>
-            <div class="details">                
-                    <span class="artist">
-                        @gig.Artist.Name
-                        @if (Model.ShowActions)
-                        {
-                            <button data-artist-id="@gig.ArtistId" class="js-toggle-follow btn-link">Follow</button>
-                        }
-                   </span>                                
-                   <span class="genre">
-                        @gig.Genre.Name
-                        @if (Model.ShowActions)
-                        {
-                            <button data-gig-id="@gig.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
-                        }
-                    </span>
-                
+            <div class="details">
+                <span class="artist">
+                    @gig.Artist.Name
+                    @if (Model.ShowActions)
+                    {
+                        <button data-artist-id="@gig.ArtistId" class="js-toggle-follow btn-link">Follow</button>
+                    }
+                </span>
+                <span class="genre">
+                    @gig.Genre.Name
+                    @if (Model.ShowActions)
+                    {
+                        <button data-gig-id="@gig.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
+                    }
+                </span>
+
             </div>
         </li>
     }
@@ -44,11 +44,11 @@
 
 @section scripts{
     <script>
-        $(document).ready(function() {
-            $(".js-toggle-attendance").click(function(e) {
+        $(document).ready(function () {
+            $(".js-toggle-attendance").click(function (e) {
                 var button = $(e.target);
-                $.post("/api/attendances", { gigId : button.attr("data-gig-id") })
-                    .done(function() {
+                $.post("/api/attendances", { gigId: button.attr("data-gig-id") })
+                    .done(function () {
                         button
                             .removeClass("btn-default")
                             .addClass("btn-info")
@@ -58,18 +58,18 @@
                         $(".already-attending-error")
                             .removeClass("hide")
                             .delay(2000)
-                            .queue(function() {
-                                $(".already-attending-error").addClass("hide").dequeue(); 
+                            .queue(function () {
+                                $(".already-attending-error").addClass("hide").dequeue();
                             });
                     });
             });
 
             $(".js-toggle-follow").click(function (e) {
                 var link = $(e.target);
-                $.post("/api/follows", { Followed : link.attr("data-artist-id") })
-                    .done(function() {
+                $.post("/api/follows", { Followed: link.attr("data-artist-id") })
+                    .done(function () {
                         link.text("Following");
-                    }).fail(function() {
+                    }).fail(function () {
                         alert("failed");
                     });
             });

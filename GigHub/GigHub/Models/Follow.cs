@@ -16,6 +16,9 @@ namespace GigHub.Models
         [Key]
         [Column(Order = 2)]
         public string FollowedId { get; set; }
+        public ApplicationUser Follower { get; set; }
+        public ApplicationUser Followed { get; set; }
+        
     }
 
 }

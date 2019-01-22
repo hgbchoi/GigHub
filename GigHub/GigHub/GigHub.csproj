@@ -184,6 +184,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FollowingController.cs" />
     <Compile Include="Controllers\FollowsController.cs" />
     <Compile Include="Controllers\AttendancesController.cs" />
     <Compile Include="Controllers\GigsController.cs" />
@@ -238,21 +239,22 @@
     <Compile Include="Migrations\201901180221271_changeToString.Designer.cs">
       <DependentUpon>201901180221271_changeToString.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201901180310140_changeToString1.cs" />
-    <Compile Include="Migrations\201901180310140_changeToString1.Designer.cs">
-      <DependentUpon>201901180310140_changeToString1.cs</DependentUpon>
+    <Compile Include="Migrations\201901220156427_ChangeFollowDomainModel.cs" />
+    <Compile Include="Migrations\201901220156427_ChangeFollowDomainModel.Designer.cs">
+      <DependentUpon>201901220156427_ChangeFollowDomainModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\ApplicatoinDbContext.cs" />
+    <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Follow.cs" />
     <Compile Include="Models\Attendance.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Gig.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\FollowsViewModel.cs" />
     <Compile Include="ViewModels\GigsViewModel.cs" />
     <Compile Include="ViewModels\ValidTime.cs" />
     <Compile Include="ViewModels\FutureDate.cs" />
@@ -315,6 +317,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Gigs\Create.cshtml" />
+    <Content Include="Views\Shared\Follows.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -366,8 +369,8 @@
     <EmbeddedResource Include="Migrations\201901180221271_changeToString.resx">
       <DependentUpon>201901180221271_changeToString.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901180310140_changeToString1.resx">
-      <DependentUpon>201901180310140_changeToString1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901220156427_ChangeFollowDomainModel.resx">
+      <DependentUpon>201901220156427_ChangeFollowDomainModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
