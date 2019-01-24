@@ -157,7 +157,17 @@ select.form-control {
 .gigs li > .details .genre {
     font-size: 15px;
     text-align: right;
+    margin-right: 10px;
     display: block;
+}
+
+.gigs > li .actions {
+    font-size: 15px;
+    display: none;
+}
+
+.gigs > li:hover .actions {
+    display: block
 }
 
 .hide {
