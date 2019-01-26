@@ -191,3 +191,14 @@ select.form-control {
     border-radius: 10px;
     
 }
+
+.notifications {
+    position: relative;
+}
+
+.notifications .badge {
+    position: absolute;
+    left: 25px;
+    bottom: 25px;
+    background-color: #a80a0a;
+}

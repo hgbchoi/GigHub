@@ -20,7 +20,7 @@
                 @Html.ActionLink("GigHub", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">                    
+                <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Create", "Create", "Gigs")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -38,5 +38,30 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+<script type="text/x-template">
+    <div ></div>
+</script>
+
+<script>
+    $(document).ready(function() {
+        $.getJSON("/api/notifications",
+            function(data) {
+                $(".js-notifications-count")
+                    .text(data.length)
+                    .removeClass("hide")
+                    .addClass("animated flash");
+            });
+
+        $(".notifications").popover({
+            html: true,
+            title: "Notifications",
+            placement: "bottom",
+            content: function() {
+                return "This is a test";
+            }
+        });
+    });
+    </script>
+
 </body>
 </html>
