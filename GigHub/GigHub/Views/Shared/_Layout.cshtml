@@ -38,8 +38,19 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-<script type="text/x-template">
-    <div ></div>
+<script type="text/x-template" id="notifications-template">
+    <ul>
+        <%
+            _.each(notifications, function(notification){
+            if(notification.type == 1){ %>
+            <li><%= notification.gig.artist.name %> has canceled the gig at <%= notification.gig.venue %> at <%= notification.gig.dateTime %></li>
+            <% }
+            @*if(notification.type == 2){ %>
+            <li><%= notification.gig.artist.name %> has updated the gig at <%= notificaiton.originalVenue => <%= notification.originalDateTime %> to <%= notification.gig.venue %> <%= notification.gig.dateTime %></li>
+            <%}*@
+        })
+        %>
+    </ul>
 </script>
 
 <script>
@@ -50,16 +61,17 @@
                     .text(data.length)
                     .removeClass("hide")
                     .addClass("animated flash");
+                
+                $(".notifications").popover({
+                    html: true,
+                    title: "Notifications",
+                    placement: "bottom",
+                    content: function() {
+                        var compiled = _.template($("#notifications-template").html());
+                        return compiled({ notifications : data });                        
+                    }
+                });
             });
-
-        $(".notifications").popover({
-            html: true,
-            title: "Notifications",
-            placement: "bottom",
-            content: function() {
-                return "This is a test";
-            }
-        });
     });
     </script>
 

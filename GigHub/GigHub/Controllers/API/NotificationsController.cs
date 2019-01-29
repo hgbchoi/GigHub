@@ -29,7 +29,7 @@ namespace GigHub.Controllers.API
             var notifications = _context.UserNotifications
                 .Where(n => n.UserId == userId && !n.IsRead)
                 .Select(n => n.Notification)     
-                .Include(n => n.Gig)
+                .Include(n => n.Gig.Artist)
                 .ToList();
         
             return notifications.Select(Mapper.Map<Notification, NotificationDto>);

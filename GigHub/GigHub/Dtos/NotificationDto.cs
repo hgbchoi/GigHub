@@ -13,6 +13,6 @@ namespace GigHub.Dtos
         public NotificationType Type { get; set; }
         public DateTime? OriginalDateTime { get; set; }
         public string OriginalVenue { get; set; }        
-        public Gig Gig { get; set; }
+        public GigDto Gig { get; set; }
     }
 }
