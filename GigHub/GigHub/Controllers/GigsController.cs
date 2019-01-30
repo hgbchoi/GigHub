@@ -86,7 +86,7 @@ namespace GigHub.Controllers
         public ActionResult Update(GigFormViewModel viewModel)
         {
             var userId = User.Identity.GetUserId();
-            var gig = _context.Gigs.Single(g => g.Id == viewModel.Id && g.ArtistId == userId);
+            var gig = _context.Gigs.Include(g => g.Attendances.Select(a => a.Attendee)).Single(g => g.Id == viewModel.Id && g.ArtistId == userId);
             gig.Update(viewModel.Venue, viewModel.GetDateTime(), viewModel.Genre);
 
             _context.SaveChanges();
