@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Web.Hosting
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -11,6 +12,8 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
+            @HostingEnvironment.ApplicationPhysicalPath
+
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
@@ -35,15 +38,14 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/lib")    
     @RenderSection("scripts", required: false)
 <script type="text/x-template" id="notifications-template">
-    <ul>
+    <ul  class="notification-list">
         <%
             _.each(notifications, function(notification){
             if(notification.type == 1){ %>
-            <li><%= notification.gig.artist.name %> has canceled the gig at <%= notification.gig.venue %> at <%= notification.gig.dateTime %></li>
+            <li class="notification-list-item"><span class="bold"><%= notification.gig.artist.name %></span> has canceled the gig at <span class="bold"><%= notification.gig.venue %></span> at <span class="bold"><%= moment(notification.gig.dateTime).format("d MMM HH:mm") %></span></li>
             <% }
             else if(notification.type == 2){ 
                 var changes = [], originalValues = [], newValues = [];
@@ -55,12 +57,12 @@
                 
                 if (notification.originalDateTime != notification.gig.DateTime)   {
                     changes.push('date/time');
-                    originalValues.push(notification.originalDateTime);
-                    newValues.push(notification.gig.dateTime);
+                    originalValues.push(moment(notification.originalDateTime).format("d MMM HH:mm"));
+                    newValues.push(moment(notification.gig.dateTime).format("d MMM HH:mm"));
                 }
             
             %>
-            <li><%= notification.gig.artist.name %> has updated the gig at <%= changes.join(' and ') %> of the gig from <%= originalValues.join('/') %> to <%= newValues.join('/') %></li>
+            <li class="notification-list-item"><span class="bold"><%= notification.gig.artist.name %></span> has updated the gig at <span class="bold"><%= changes.join(' and ') %></span> of the gig from <span class="bold"><%= originalValues.join('/') %></span> to <span class="bold"><%= newValues.join('/') %></span></li>
             <% } 
         })
         %>
@@ -71,7 +73,7 @@
     $(document).ready(function() {
         $.getJSON("/api/notifications",
             function (data) {
-                if (notifications.length == 0) return;
+                if (data.length == 0) return;
                 $(".js-notifications-count")
                     .text(data.length)
                     .removeClass("hide")

@@ -106,6 +106,9 @@ select.form-control {
     border-radius: 9px;
 }
 
+.popover {
+    box-shadow: none;
+}
 /* Page-level styles*/
 
 .gigs {
@@ -196,9 +199,32 @@ select.form-control {
     position: relative;
 }
 
+.notification-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.notification-list-item {
+    padding: 10px;
+    border-bottom: 1px solid #999999;
+    margin-bottom: 5px
+}
+
+.notification-list-item:last-child {
+    border-bottom: none;
+}
+
 .notifications .badge {
     position: absolute;
     left: 25px;
     bottom: 25px;
     background-color: #a80a0a;
+}
+
+.popover-content {
+    padding: 0;
+}
+
+.bold {
+    font-weight: bold;
 }
