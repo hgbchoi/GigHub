@@ -12,8 +12,6 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            @HostingEnvironment.ApplicationPhysicalPath
-
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
@@ -87,6 +85,21 @@
                         var compiled = _.template($("#notifications-template").html());
                         return compiled({ notifications : data });                        
                     }
+                }).on("shown.bs.popover", function () {
+                    var notification = JSON.stringify(data);
+                    $.ajax({
+                        type: "POST",
+                        url: "api/Notifications/MarkAsRead",
+                        data: notification,
+                        contentType: "application/json",
+                        success: function() {
+                            alert('Success');
+                        },
+                        error: function (response, res) {
+                            alert(res);
+                            console.log(JSON.stringify(this.data));
+                        }
+                    });
                 });
             });
     });

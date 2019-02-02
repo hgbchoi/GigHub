@@ -12,7 +12,7 @@ using Microsoft.AspNet.Identity;
 
 namespace GigHub.Controllers.API
 {
-    [Authorize]
+    
     public class NotificationsController : ApiController
     {
         private readonly ApplicationDbContext _context;
@@ -34,5 +34,19 @@ namespace GigHub.Controllers.API
         
             return notifications.Select(Mapper.Map<Notification, NotificationDto>);
         }
+
+        [HttpPost]
+        public IHttpActionResult MarkAsRead(IEnumerable<NotificationDto> notifications)
+        {                        
+            /*foreach (var item in notifications)
+            {
+                //_context.UserNotifications.ToList().Find(un => un.NotificationId == item. && !un.IsRead).IsRead = true;
+            }*/
+
+            return Ok();
+
+        }
     }
+
+    
 }
