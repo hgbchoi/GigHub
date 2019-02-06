@@ -300,6 +300,7 @@
     <Content Include="package.json" />
     <Content Include="Content\sass\main.scss" />
     <Content Include="Content\sass\site.scss" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\gulpfile.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
