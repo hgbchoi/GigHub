@@ -30,6 +30,21 @@ namespace GigHub.Controllers
                 .ToList();                                                            
             return View(gigs);
         }
+        
+        public ActionResult Search(string searchString)
+        {
+            var viewModel = new GigsViewModel
+            {
+                Heading = "Upcoming Gigs",
+                UpcomingGigs = _context.Gigs
+                    .Where(g => !g.IsCanceled && (g.Artist.Name.Contains(searchString) 
+                    || g.Genre.Name.Contains(searchString) 
+                    || g.Venue.Contains(searchString)))
+                    .Include(g => g.Artist).Include(g => g.Genre).ToList(),
+                 SearchString = searchString
+            };
+            return View("Gigs", viewModel);
+        }
 
         [Authorize]
         public ActionResult Attending()

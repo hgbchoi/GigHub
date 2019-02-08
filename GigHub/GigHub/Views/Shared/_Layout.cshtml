@@ -89,11 +89,15 @@
                     var notification = JSON.stringify(data);
                     $.ajax({
                         type: "POST",
-                        url: "api/Notifications/MarkAsRead",
+                        url: "/api/Notifications/MarkAsRead",
                         data: notification,
                         contentType: "application/json",
                         success: function() {
-                            alert('Success');
+                            $(".js-notifications-count").hide();
+                            $(".notifications").popover({
+                                content: none
+                        });
+
                         },
                         error: function (response, res) {
                             alert(res);

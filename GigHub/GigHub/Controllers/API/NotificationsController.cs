@@ -9,6 +9,7 @@ using AutoMapper;
 using GigHub.Dtos;
 using GigHub.Models;
 using Microsoft.AspNet.Identity;
+using WebGrease.Css.Extensions;
 
 namespace GigHub.Controllers.API
 {
@@ -37,12 +38,10 @@ namespace GigHub.Controllers.API
 
         [HttpPost]
         public IHttpActionResult MarkAsRead(IEnumerable<NotificationDto> notifications)
-        {                        
-            /*foreach (var item in notifications)
-            {
-                //_context.UserNotifications.ToList().Find(un => un.NotificationId == item. && !un.IsRead).IsRead = true;
-            }*/
-
+        {
+            var userId = User.Identity.GetUserId();                        
+            _context.UserNotifications.Where(un => !un.IsRead && un.UserId == userId).ForEach(un => un.IsRead = true);            
+            _context.SaveChanges();
             return Ok();
 
         }

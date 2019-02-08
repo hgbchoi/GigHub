@@ -9,7 +9,8 @@ using Newtonsoft.Json;
 namespace GigHub.Dtos
 {
     public class NotificationDto
-    {        
+    {
+        public int Id;
         [JsonProperty("dateTime")]
         public DateTime DateTime { get; set; }
         [JsonProperty("type")]

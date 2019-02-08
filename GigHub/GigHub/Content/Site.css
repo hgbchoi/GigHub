@@ -169,3 +169,9 @@ select.form-control {
 
 .bold {
   font-weight: bold; }
+
+.search-input {
+  display: inline-block; }
+
+.form-control {
+  transition: none; }
