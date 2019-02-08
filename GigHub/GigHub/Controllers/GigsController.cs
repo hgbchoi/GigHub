@@ -46,6 +46,22 @@ namespace GigHub.Controllers
             return View("Gigs", viewModel);
         }
 
+        public ActionResult Details(int id)
+        {
+            var userId = User.Identity.GetUserId();
+            var gig = _context.Gigs.Include(g => g.Artist).Include(g=>g.Attendances).Single(g => g.Id == id);                      
+            var viewModel = new DetailsViewModel();
+            viewModel.Gig = gig;            
+            viewModel.IsGoing = gig.Attendances.Any(a => a.AttendeeId == userId);
+            viewModel.IsFollowing = _context.Follows.Any(f => f.FollowedId == gig.ArtistId && f.FollowerId == userId);
+            if (User.Identity.GetUserId() != null)
+            {
+                viewModel.ShowActions = true;
+            }
+            return View(viewModel);
+        }
+
+
         [Authorize]
         public ActionResult Attending()
         {
