@@ -1,0 +1,16 @@
+﻿@model GigHub.ViewModels.DetailsViewModel
+
+
+<h2>@Model.Gig.Artist.Name</h2>
+<p>This gig is at @Model.Gig.Venue on @Model.Gig.DateTime</p>
+@if (Model.ShowActions)
+{
+    if (Model.IsFollowing)
+     {
+         <p>You are following this artist!</p>
+     }
+    if (@Model.IsGoing)
+     {
+         <p>You are attending this gig!</p>
+     }
+}

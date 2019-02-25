@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Web.Hosting
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,6 +7,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -16,14 +18,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("GigHub", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Create", "Create", "Gigs")</li>
                 </ul>
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
@@ -35,8 +36,78 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/lib")    
     @RenderSection("scripts", required: false)
+<script type="text/x-template" id="notifications-template">
+    <ul  class="notification-list">
+        <%
+            _.each(notifications, function(notification){
+            if(notification.type == 1){ %>
+            <li class="notification-list-item"><span class="bold"><%= notification.gig.artist.name %></span> has canceled the gig at <span class="bold"><%= notification.gig.venue %></span> at <span class="bold"><%= moment(notification.gig.dateTime).format("d MMM HH:mm") %></span></li>
+            <% }
+            else if(notification.type == 2){ 
+                var changes = [], originalValues = [], newValues = [];
+                if (notification.originalVenue != notification.gig.venue)        {
+                    changes.push('venue');
+                    originalValues.push(notification.originalVenue);
+                    newValues.push(notification.gig.venue);
+                }
+                
+                if (notification.originalDateTime != notification.gig.DateTime)   {
+                    changes.push('date/time');
+                    originalValues.push(moment(notification.originalDateTime).format("d MMM HH:mm"));
+                    newValues.push(moment(notification.gig.dateTime).format("d MMM HH:mm"));
+                }
+            
+            %>
+            <li class="notification-list-item"><span class="bold"><%= notification.gig.artist.name %></span> has updated the gig at <span class="bold"><%= changes.join(' and ') %></span> of the gig from <span class="bold"><%= originalValues.join('/') %></span> to <span class="bold"><%= newValues.join('/') %></span></li>
+            <% } 
+        })
+        %>
+    </ul>
+</script>
+
+<script>
+    $(document).ready(function() {
+        $.getJSON("/api/notifications",
+            function (data) {
+                if (data.length == 0) return;
+                $(".js-notifications-count")
+                    .text(data.length)
+                    .removeClass("hide")
+                    .addClass("animated flash");
+                
+                $(".notifications").popover({
+                    html: true,
+                    title: "Notifications",
+                    placement: "bottom",
+                    content: function() {
+                        var compiled = _.template($("#notifications-template").html());
+                        return compiled({ notifications : data });                        
+                    }
+                }).on("shown.bs.popover", function () {
+                    var notification = JSON.stringify(data);
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/Notifications/MarkAsRead",
+                        data: notification,
+                        contentType: "application/json",
+                        success: function() {
+                            $(".js-notifications-count").hide();
+                            $(".notifications").popover({
+                                content: none
+                        });
+
+                        },
+                        error: function (response, res) {
+                            alert(res);
+                            console.log(JSON.stringify(this.data));
+                        }
+                    });
+                });
+            });
+    });
+    </script>
+
 </body>
 </html>
